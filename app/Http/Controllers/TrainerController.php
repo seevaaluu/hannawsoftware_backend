@@ -16,7 +16,9 @@ class TrainerController extends Controller
      */
     public function index()
     {
-        //
+        return $trainers = Trainer::with('pokemons')->orderBy('id', 'desc')->paginate(10);
+
+        if(request()->wantsJson()) return $trainers;
     }
 
     /**
@@ -30,7 +32,7 @@ class TrainerController extends Controller
         $request->validate([
             'pokemons' => 'array|min:6',
             'id_user' => 'required',
-            //'email' => 'required|email|unique:trainers,email',
+            'email' => 'required|email|unique:trainers,email',
             'name' => 'required',
             'last_name' => 'required',
             'second_last_name' => 'required',

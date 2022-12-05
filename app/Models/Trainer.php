@@ -15,4 +15,12 @@ class Trainer extends Model
      * @var string
      */
     protected $table = 'trainer';
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function pokemons()
+    {
+        return $this->hasMany(Pokemon::class);
+    }
 }
