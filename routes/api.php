@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ use App\Http\Controllers\TrainerController;
 Route::controller(TrainerController::class)->group(function() {
     Route::get('entrenadores', 'index')->name('trainers.index');
     Route::post('entrenadores', 'store')->name('trainers.store');
+});
+    
+// Routes Stats
+Route::controller(StatsController::class)->group(function() {
+    Route::get('estadisticas', 'index') ->name('stats.index');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
