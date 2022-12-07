@@ -21,6 +21,7 @@ use App\Http\Controllers\AuthController;
 
 Route::controller(AuthController::class)->group(function() {
     Route::post('login', 'login');
+    Route::post('logout', 'logout');
 });
 
 // Trainer Routes
@@ -41,5 +42,5 @@ Route::controller(SettingsController::class)->group(function() {
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return \Auth::user();
 });
