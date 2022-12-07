@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -37,10 +38,9 @@ class AuthController extends Controller
             ], 401);
         }    
         
-        $token = $request->user()->createToken('API_TOKEN');
+        $request->session()->regenerate();
         
         if(request()->wantsJson()) return [
-            "token" => $token,
             "user" => Auth::user(),
             "message_type" => "success",
             "message_text" => "Has ingresado correctamente."
@@ -49,36 +49,19 @@ class AuthController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function logout()
     {
-        //
-    }
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return [
+            'message_type' => 'success',
+            'message_text' => null
+        ];
     }
 }
