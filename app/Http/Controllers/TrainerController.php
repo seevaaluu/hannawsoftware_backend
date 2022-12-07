@@ -32,7 +32,7 @@ class TrainerController extends Controller
         $request->validate([
             'pokemons' => 'array|min:6',
             'id_user' => 'required',
-            'email' => 'required|email|unique:trainers,email',
+            'email' => 'required|email|unique:trainer,email',
             'name' => 'required',
             'last_name' => 'required',
             'second_last_name' => 'required',

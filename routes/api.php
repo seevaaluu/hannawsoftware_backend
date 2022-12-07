@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\StatsController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,12 @@ Route::controller(TrainerController::class)->group(function() {
 // Routes Stats
 Route::controller(StatsController::class)->group(function() {
     Route::get('estadisticas', 'index') ->name('stats.index');
+});
+
+// Routes Settings 
+Route::controller(SettingsController::class)->group(function() {
+    Route::get('configuraciones/{slug}', 'show')->name('settings.show');
+    Route::patch('configuraciones/{id}', 'update')->name('settings.update');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
