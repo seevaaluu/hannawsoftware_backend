@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use App\Http\Controllers\SettingsController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::controller(AuthController::class)->group(function() {
+    Route::post('login', 'login');
+});
 
 // Trainer Routes
 Route::controller(TrainerController::class)->group(function() {
